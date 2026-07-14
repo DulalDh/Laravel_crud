@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -19,8 +20,9 @@ class CourseController extends Controller
                 ->orWhere('description', 'like', "%{$search}%");
         }
         $courses = $courses->with('students')->cursorPaginate(10);
+        $students = Student::orderBy('name', 'asc')->get(['id', 'name', 'email']);
 
-        return view('course.index', compact('courses'));
+        return view('course.index', compact('courses', 'students'));
     }
 
     /**
@@ -97,5 +99,17 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route('course.index')->with('success', 'Course deleted successfully.');
+    }
+
+    public function attachStudent(Request $request)
+    {
+        $request->validate([
+            'student_ids' => 'array',
+            'student_ids.*' => 'exists:students,id',
+        ]);
+        $course = Course::findOrFail($request->course_id);
+        $course->students()->sync($request->student_ids);
+
+        return redirect()->route('course.index')->with('success', 'Students attached successfully.');
     }
 }

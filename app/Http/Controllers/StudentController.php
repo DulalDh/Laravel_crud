@@ -105,11 +105,11 @@ class StudentController extends Controller
     public function attachCourses(Request $request)
     {
         $request->validate([
-            'course_ids' => 'required|array',
+            'course_ids' => 'array',
             'course_ids.*' => 'exists:courses,id',
         ]);
         $student = Student::findOrFail($request->student_id);
-        $student->courses()->attach($request->course_ids);
+        $student->courses()->sync($request->course_ids);
 
         return redirect()->route('student.index')->with('success', 'Courses attached successfully.');
     }

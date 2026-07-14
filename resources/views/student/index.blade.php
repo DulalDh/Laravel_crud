@@ -165,7 +165,7 @@
 
             <div class="offcanvas-footer border-top p-3 bg-body sticky-bottom">
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary flex-fill" id="studentCourseAttachButton" disabled>
+                    <button type="submit" class="btn btn-primary flex-fill" id="studentCourseAttachButton">
                         Attach
                     </button>
                     <button type="button" class="btn btn-outline-secondary flex-fill" data-bs-dismiss="offcanvas">
@@ -189,10 +189,6 @@
             const rows = Array.from(document.querySelectorAll('[data-course-row]'));
             const triggers = Array.from(document.querySelectorAll('[data-course-attach-trigger]'));
 
-            const syncButtonState = () => {
-                const checkedCount = checkboxes.filter((checkbox) => checkbox.checked).length;
-                attachButton.disabled = checkedCount === 0;
-            };
 
             const syncSelectAllState = () => {
                 if (!selectAll) {
@@ -210,7 +206,6 @@
             };
 
             const syncAllState = () => {
-                syncButtonState();
                 syncSelectAllState();
             };
 

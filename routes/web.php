@@ -34,8 +34,11 @@ Route::delete('customer/{customer}/delete', [CustomerController::class, 'delete'
 Route::get('customer/{id}/posts', [PostController::class, 'index'])->name('post.index');
 
 Route::resource('customer', CustomerController::class);
-Route::post('student/{student}/courses', [StudentController::class, 'attachCourses'])->name('student.courses.store');
+
 Route::resource('student', StudentController::class);
+Route::post('student/{student}/courses', [StudentController::class, 'attachCourses'])->name('student.courses.store');
+
 Route::resource('course', CourseController::class);
+Route::post('course/{course}/students', [CourseController::class, 'attachStudent'])->name('course.students.store');
 
 require __DIR__.'/settings.php';
