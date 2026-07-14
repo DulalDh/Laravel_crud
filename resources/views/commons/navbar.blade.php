@@ -10,6 +10,8 @@
                 <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
                 <a class="nav-link" href="{{ route('shop.index') }}">Shop List</a>
                 <a class="nav-link" href="{{ route('customer.index') }}">Customer List</a>
+                <a class="nav-link" href="{{ route('student.index') }}">Student List</a>
+                <a class="nav-link" href="{{ route('course.index') }}">Course List</a>
             </div>
         </div>
     </div>

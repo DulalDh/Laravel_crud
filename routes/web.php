@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CourceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('home');
@@ -31,5 +33,7 @@ Route::patch('customer/{customer}/restore', [CustomerController::class, 'restore
 Route::delete('customer/{customer}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 Route::resource('customer', CustomerController::class);
 Route::get('customer/{id}/posts', [PostController::class, 'index'])->name('post.index');
+Route::resource('student', StudentController::class);
+Route::resource('course', CourceController::class);
 
 require __DIR__.'/settings.php';
