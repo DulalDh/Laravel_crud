@@ -6,31 +6,31 @@
             <div class="card-body pt-3 px-4 pb-4">
                 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
                     <div class="me-lg-4">
-                        <h1 class="h3 mb-1">Shops</h1>
-                        <p class="text-muted mb-0">Review, search, and manage shop records.</p>
+                        <h1 class="h3 mb-1">Courses</h1>
+                        <p class="text-muted mb-0">Review, search, and manage course records.</p>
                     </div>
 
                     <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">
-                        <form action="{{ route('shop.index') }}" method="GET" class="d-flex flex-column flex-sm-row gap-2">
+                        <form action="{{ route('course.index') }}" method="GET" class="d-flex flex-column flex-sm-row gap-2">
                             <div class="input-group">
                                 <input
                                     type="search"
                                     name="search"
                                     class="form-control"
-                                    placeholder="Search shops"
+                                    placeholder="Search courses"
                                     value="{{ request('search') }}"
                                 >
                                 <button class="btn btn-outline-primary" type="submit">Search</button>
                             </div>
 
                             @if (request('search'))
-                                <a href="{{ route('shop.index') }}" class="btn btn-outline-secondary">
+                                <a href="{{ route('course.index') }}" class="btn btn-outline-secondary">
                                     Clear
                                 </a>
                             @endif
                         </form>
 
-                        <a href="{{ route('shop.create') }}" class="btn btn-primary text-nowrap">
+                        <a href="{{ route('course.create') }}" class="btn btn-primary text-nowrap">
                             Add New
                         </a>
                     </div>
@@ -47,34 +47,26 @@
                         <thead class="table-light">
                             <tr>
                                 <th scope="col">#Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">TIN</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col" class="text-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($shopData as $shop)
+                            @foreach ($courses as $course)
                                 <tr>
-                                    <th scope="row">{{ $shop->id }}</th>
-                                    <td class="fw-semibold">{{ $shop->shop_name }}</td>
-                                    <td>{{ $shop->shop_address }}</td>
-                                    <td>{{ $shop->shop_phone }}</td>
-                                    <td>{{ $shop->shop_email }}</td>
-                                    <td>{{ $shop->tin_number ?? 'N/A' }}</td>
-                                    <td class="text-nowrap">
+                                    <th scope="row">{{ $course->id }}</th>
+                                    <td class="fw-semibold">{{ $course->title }}</td>
+                                    <td>{{ $course->description }}</td>
+                                    <td>
                                         <div class="d-flex flex-wrap gap-2">
-                                            <a href="{{ route('shop.edit', $shop->id) }}" class="btn btn-outline-secondary btn-sm">
+                                            <a href="{{ route('course.edit', $course->id) }}" class="btn btn-outline-secondary btn-sm">
                                                 Edit
                                             </a>
-                                            <form action="{{ route('shop.destroy', $shop->id) }}" method="POST" onsubmit="return confirm('Are you sure?, You want to delete shop')">
+                                            <form action="{{ route('course.destroy', $course->id) }}" method="POST" onsubmit="return confirm('Are you sure?, You want to delete course')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                    Delete
-                                                </button>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                             </form>
                                         </div>
                                     </td>
@@ -85,7 +77,7 @@
                 </div>
 
                 <div class="mt-4">
-                    {{ $shopData->links() }}
+                    {{ $courses->links() }}
                 </div>
             </div>
         </div>

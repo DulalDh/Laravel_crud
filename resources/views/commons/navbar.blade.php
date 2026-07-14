@@ -25,6 +25,12 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('customer.index') }}">Customers</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('student.index') }}">Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('course.index') }}">Courses</a>
+          </li>
         </ul>
         
         <!-- Call to Action Buttons -->

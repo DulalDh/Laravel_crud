@@ -3,29 +3,16 @@
 @section('content')
     <div class="container py-4">
         <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-                    <div>
-                        <p class="text-uppercase text-muted small mb-1">Management</p>
-                        <h1 class="h4 mb-0">Customers</h1>
+            <div class="card-body pt-3 px-4 pb-4">
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
+                    <div class="me-lg-4">
+                        <h1 class="h3 mb-1">Customers</h1>
+                        <p class="text-muted mb-0">Review, search, and manage customer records.</p>
                     </div>
 
-                    <a href="{{ route('customer.create') }}" class="btn btn-primary px-3">
-                        Add New
-                    </a>
-                </div>
-
-                @if (session('success'))
-                    <div class="alert alert-success mb-4">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                <form action="{{ route('customer.index') }}" method="GET" class="mb-4">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-12 col-md">
+                    <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">
+                        <form action="{{ route('customer.index') }}" method="GET" class="d-flex flex-column flex-sm-row gap-2">
                             <div class="input-group">
-                                <span class="input-group-text bg-white">Search</span>
                                 <input
                                     type="search"
                                     name="search"
@@ -35,14 +22,25 @@
                                 >
                                 <button class="btn btn-outline-primary" type="submit">Search</button>
                             </div>
-                        </div>
-                        @if (request('search'))
-                            <div class="col-12 col-md-auto">
-                                <a href="{{ route('customer.index') }}" class="btn btn-outline-secondary w-100">Clear</a>
-                            </div>
-                        @endif
+
+                            @if (request('search'))
+                                <a href="{{ route('customer.index') }}" class="btn btn-outline-secondary">
+                                    Clear
+                                </a>
+                            @endif
+                        </form>
+
+                        <a href="{{ route('customer.create') }}" class="btn btn-primary text-nowrap">
+                            Add New
+                        </a>
                     </div>
-                </form>
+                </div>
+
+                @if (session('success'))
+                    <div class="alert alert-success mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
