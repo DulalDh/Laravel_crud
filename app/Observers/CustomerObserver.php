@@ -3,12 +3,15 @@
 namespace App\Observers;
 
 use App\Models\customer;
+use Illuminate\Support\Facades\Schema;
 
 class CustomerObserver
 {
     public function creating(customer $customer): void
     {
-        $customer->created_by = 'Dulal DH';
+        if (Schema::hasColumn('customers', 'created_by')) {
+            $customer->created_by = 'Dulal DH';
+        }
     }
 
     /**

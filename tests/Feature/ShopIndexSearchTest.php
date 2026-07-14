@@ -19,6 +19,7 @@ it('filters shops by search term', function () {
 
     get(route('shop.index', ['search' => 'Hardware']))
         ->assertOk()
+        ->assertSee('Add New')
         ->assertSee('Dinajpur Hardware')
         ->assertDontSee('Dhaka Stationery')
         ->assertSee('value="Hardware"', false);

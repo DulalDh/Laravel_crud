@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\ShowOnlyActive;
+// use App\Models\Scopes\ShowOnlyActive;
 use App\Observers\CustomerObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class customer extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = ['name', 'email', 'phone'];
