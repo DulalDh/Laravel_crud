@@ -10,9 +10,15 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::orderBy('id', 'desc')->cursorPaginate(10);
+        $search = $request->string('search')->trim()->toString();
+        $courses = Course::orderBy('id', 'desc');
+        if ($search !== '') {
+            $courses = $courses->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        }
+        $courses = $courses->with('students')->cursorPaginate(10);
 
         return view('course.index', compact('courses'));
     }
@@ -22,7 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create');
     }
 
     /**
@@ -30,7 +36,17 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        Course::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('course.index')->with('success', 'Course created successfully.');
     }
 
     /**
@@ -38,7 +54,9 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        return view('course.show', compact('course'));
     }
 
     /**
@@ -46,7 +64,9 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+
+        return view('course.edit', compact('course'));
     }
 
     /**
@@ -54,7 +74,18 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        $course = Course::findOrFail($id);
+        $course->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('course.index')->with('success', 'Course updated successfully.');
     }
 
     /**
@@ -62,6 +93,9 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+        $course->delete();
+
+        return redirect()->route('course.index')->with('success', 'Course deleted successfully.');
     }
 }

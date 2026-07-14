@@ -46,6 +46,7 @@
                                 <th scope="col">#Id</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
+                                <th scope="col" class="d-flex align-items-center justify-content-center">Courses</th>
                                 <th scope="col" class="text-nowrap">Actions</th>
                             </tr>
                         </thead>
@@ -55,6 +56,15 @@
                                     <th scope="row">{{ $student->id }}</th>
                                     <td class="fw-semibold">{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
+                                    @if ($student->courses->isNotEmpty())
+                                        <td>
+                                             <a type="button" class="btn btn-outline-secondary btn-sm disabled" aria-disabled="true">{{ $student->courses->count() }}</a>
+                                        </td>
+                                    @else
+                                        <td class="d-flex align-items-center justify-content-center">
+                                            <a type="button" class="btn btn-outline-secondary btn-sm" href="{{ route('student.courses.create', $student->id) }}">Attach Course</a>
+                                        </td>
+                                    @endif
                                     <td>
                                         <div class="d-flex flex-wrap gap-2">
                                             <a href="{{ route('student.edit', $student->id) }}" class="btn btn-outline-secondary btn-sm">

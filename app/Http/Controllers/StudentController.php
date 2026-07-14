@@ -10,9 +10,16 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::orderBy('id', 'desc')->cursorPaginate(10);
+        $search = $request->string('search')->trim()->toString();
+        $students = Student::orderBy('id', 'desc');
+
+        if ($search !== '') {
+            $students = $students->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        }
+        $students = $students->with('courses')->cursorPaginate(10);
 
         return view('student.index', compact('students'));
     }
@@ -22,7 +29,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -30,7 +37,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:students',
+        ]);
+
+        Student::create([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('student.index')->with('success', 'Student created successfully.');
     }
 
     /**
@@ -38,7 +55,9 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -46,7 +65,9 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -54,7 +75,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:students,email,'.$id,
+        ]);
+
+        $student = Student::findOrFail($id);
+        $student->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('student.index')->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -62,6 +94,9 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->delete();
+
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
     }
 }

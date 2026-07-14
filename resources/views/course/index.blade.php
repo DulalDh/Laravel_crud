@@ -46,6 +46,7 @@
                                 <th scope="col">#Id</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Students</th>
                                 <th scope="col" class="text-nowrap">Actions</th>
                             </tr>
                         </thead>
@@ -55,6 +56,7 @@
                                     <th scope="row">{{ $course->id }}</th>
                                     <td class="fw-semibold">{{ $course->title }}</td>
                                     <td>{{ $course->description }}</td>
+                                    <td>{{ $course->students->count() }}</td>
                                     <td>
                                         <div class="d-flex flex-wrap gap-2">
                                             <a href="{{ route('course.edit', $course->id) }}" class="btn btn-outline-secondary btn-sm">
