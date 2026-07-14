@@ -17,19 +17,49 @@
         <!-- Centered or Right-Aligned Links -->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url('/') }}" >Home</a>
+            <a
+              class="nav-link {{ request()->routeIs('home') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('home')) aria-current="page" @endif
+              href="{{ route('home') }}"
+            >
+              Home
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('shop.index') }}">Shops</a>
+            <a
+              class="nav-link {{ request()->routeIs('shop.*') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('shop.*')) aria-current="page" @endif
+              href="{{ route('shop.index') }}"
+            >
+              Shops
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('customer.index') }}">Customers</a>
+            <a
+              class="nav-link {{ request()->routeIs('customer.*') || request()->routeIs('post.index') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('customer.*') || request()->routeIs('post.index')) aria-current="page" @endif
+              href="{{ route('customer.index') }}"
+            >
+              Customers
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('student.index') }}">Students</a>
+            <a
+              class="nav-link {{ request()->routeIs('student.*') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('student.*')) aria-current="page" @endif
+              href="{{ route('student.index') }}"
+            >
+              Students
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('course.index') }}">Courses</a>
+            <a
+              class="nav-link {{ request()->routeIs('course.*') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('course.*')) aria-current="page" @endif
+              href="{{ route('course.index') }}"
+            >
+              Courses
+            </a>
           </li>
         </ul>
         

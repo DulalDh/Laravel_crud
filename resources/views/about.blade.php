@@ -9,6 +9,8 @@
 </head>
 
 <body class="bg-gray-50">
+    @include('commons.back-button')
+
     @if (session()->has('last_user'))
         Name: {{ data_get(session('last_user'), 'name') }}<br>
         Email: {{ data_get(session('last_user'), 'email') }}<br>

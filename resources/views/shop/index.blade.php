@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container py-4">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body pt-3 px-4 pb-4">
-                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
+        <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="border-primary-subtle px-4 py-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3">
                     <div class="me-lg-4">
                         <h1 class="h3 mb-1">Shops</h1>
                         <p class="text-muted mb-0">Review, search, and manage shop records.</p>
@@ -29,6 +29,9 @@
                         </a>
                     </div>
                 </div>
+            </div>
+
+            <div class="card-body pt-3 px-4 pb-4">
 
                 @if (session('success'))
                     <div class="alert alert-success mb-4">

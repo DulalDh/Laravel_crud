@@ -9,6 +9,8 @@
 </head>
 
 <body class="bg-gray-50">
+    @include('commons.back-button', ['backUrl' => url('/')])
+
     <div class="min-h-screen py-10">
         <div class="mx-auto max-w-3xl px-4">
 
