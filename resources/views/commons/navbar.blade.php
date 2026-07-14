@@ -1,10 +1,36 @@
+@php
+    $backUrl = url()->previous() !== url()->current() ? url()->previous() : route('home');
+@endphp
+
 <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
     <div class="container">
-      
-      <!-- Logo / Brand -->
-      <a class="navbar-brand fw-bold fs-4 text-primary" href="{{ url('/') }}">
-        DH <span class="text-dark">Store</span>
-      </a>
+      <div class="d-flex align-items-center gap-2">
+        <a
+          href="{{ $backUrl }}"
+          class="btn btn-outline-secondary btn-sm rounded-pill px-3 d-inline-flex align-items-center gap-2"
+          aria-label="Go back"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M6.854 3.646a.5.5 0 0 1 0 .708L3.707 7.5H13.5a.5.5 0 0 1 0 1H3.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span class="d-none d-sm-inline">Back</span>
+        </a>
+
+        <a class="navbar-brand fw-bold fs-4 text-primary mb-0" href="{{ url('/') }}">
+          DH <span class="text-dark">Store</span>
+        </a>
+      </div>
 
       <!-- Mobile Toggle Hamburger -->
       <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
