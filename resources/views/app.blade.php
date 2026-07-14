@@ -54,6 +54,24 @@
         document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((tooltipTrigger) => {
             new bootstrap.Tooltip(tooltipTrigger);
         });
+
+        document.querySelectorAll('[data-debounced-search-form]').forEach((searchForm) => {
+            const searchInput = searchForm.querySelector('[data-debounced-search-input]');
+
+            if (!searchInput) {
+                return;
+            }
+
+            let debounceTimer = null;
+
+            searchInput.addEventListener('input', () => {
+                window.clearTimeout(debounceTimer);
+
+                debounceTimer = window.setTimeout(() => {
+                    searchForm.requestSubmit();
+                }, 400);
+            });
+        });
     </script>
 </body>
 

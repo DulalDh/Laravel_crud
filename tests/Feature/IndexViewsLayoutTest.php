@@ -12,6 +12,8 @@ it('renders the customer list page with a responsive header and table shell', fu
         ->assertSee('Customers')
         ->assertSee('Review, search, and manage customer records.')
         ->assertSee('Add New')
+        ->assertDontSee('Clear')
+        ->assertSee('data-debounced-search-form', false)
         ->assertSee('table-responsive', false)
         ->assertSee('table table-hover align-middle mb-0', false);
 });
@@ -22,6 +24,8 @@ it('renders the student list page with a responsive header and table shell', fun
         ->assertSee('Students')
         ->assertSee('Review, search, and manage student records.')
         ->assertSee('Add New')
+        ->assertDontSee('Clear')
+        ->assertSee('data-debounced-search-form', false)
         ->assertSee('table-responsive', false)
         ->assertSee('table table-hover align-middle mb-0', false);
 });
@@ -32,6 +36,8 @@ it('renders the shop list page with a responsive header and table shell', functi
         ->assertSee('Shops')
         ->assertSee('Review, search, and manage shop records.')
         ->assertSee('Add New')
+        ->assertDontSee('Clear')
+        ->assertSee('data-debounced-search-form', false)
         ->assertSee('table-responsive', false)
         ->assertSee('table table-hover align-middle mb-0', false);
 });
@@ -42,6 +48,8 @@ it('renders the course list page with a responsive header and table shell', func
         ->assertSee('Courses')
         ->assertSee('Review, search, and manage course records.')
         ->assertSee('Add New')
+        ->assertDontSee('Clear')
+        ->assertSee('data-debounced-search-form', false)
         ->assertSee('table-responsive', false)
         ->assertSee('table table-hover align-middle mb-0', false);
 });

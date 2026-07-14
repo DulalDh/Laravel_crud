@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">
-                        <form action="{{ route('student.index') }}" method="GET" class="d-flex flex-column flex-sm-row gap-2">
+                        <form action="{{ route('student.index') }}" method="GET" class="d-flex flex-column flex-sm-row gap-2" data-debounced-search-form>
                             <div class="input-group">
                                 <input
                                     type="search"
@@ -19,15 +19,9 @@
                                     class="form-control"
                                     placeholder="Search students"
                                     value="{{ request('search') }}"
+                                    data-debounced-search-input
                                 >
-                                <button class="btn btn-outline-primary" type="submit">Search</button>
                             </div>
-
-                            @if (request('search'))
-                                <a href="{{ route('student.index') }}" class="btn btn-outline-secondary">
-                                    Clear
-                                </a>
-                            @endif
                         </form>
 
                         <a href="{{ route('student.create') }}" class="btn btn-primary text-nowrap">
