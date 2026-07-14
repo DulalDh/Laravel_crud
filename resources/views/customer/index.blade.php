@@ -31,6 +31,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Status</th>
+                    <th scope="col">DOB</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -49,6 +50,8 @@
                             @endif
                         </td>
 
+                        <td>{{ $customer->customer_detail->dob }}</td>
+                        
                         <td class="d-flex">
                             <div class="d-flex justify-content-between gap-1">
                                 <a href="{{ route('customer.edit', $customer->id) }}" type="button" class="btn btn-secondary"
@@ -116,6 +119,7 @@
                                         </button>
                                     </form>
                                 @endif
+                                    <a class="btn btn-primary" href="{{ route('post.index', $customer->id), }}">Posts</a>
                             </div>
                         </td>
                     </tr>

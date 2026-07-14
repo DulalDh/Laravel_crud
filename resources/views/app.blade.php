@@ -55,7 +55,6 @@
             new bootstrap.Tooltip(tooltipTrigger);
         });
     </script>
-
 </body>
 
 </html>

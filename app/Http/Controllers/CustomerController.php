@@ -12,8 +12,9 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
+
         $search = $request->string('search')->trim()->toString();
-        $query = customer::withTrashed()->orderBy('id');
+        $query = customer::with('customer_detail:customer_id,dob')->withTrashed()->orderBy('id');
 
         if ($search !== '') {
             $query->where('name', 'like', "%{$search}%")
@@ -22,7 +23,9 @@ class CustomerController extends Controller
         }
         $customers = $query->cursorPaginate(10);
 
-        return view("customer.index", compact("customers"));
+        // return $customers;
+
+        return view('customer.index', compact('customers'));
     }
 
     /**
@@ -30,7 +33,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view("customer.create");
+        return view('customer.create');
     }
 
     /**
@@ -38,7 +41,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //validation
+        // validation
         $request->validate([
             'name' => 'required|max:255|unique:customers',
             'email' => 'required|max:50|unique:customers',
@@ -48,8 +51,10 @@ class CustomerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'status' => 'active',
         ]);
-        return redirect()->route("customer.index")->with("success", "Customer created successfully.");
+
+        return redirect()->route('customer.index')->with('success', 'Customer created successfully.');
     }
 
     /**
@@ -66,7 +71,8 @@ class CustomerController extends Controller
     public function edit(string $id)
     {
         $customer = customer::findOrFail($id);
-        return view("customer.edit", compact("customer"));
+
+        return view('customer.edit', compact('customer'));
     }
 
     /**
@@ -75,16 +81,17 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|max:255|unique:customers,name,' . $id,
-            'email' => 'required|max:50|unique:customers,email,' . $id,
-            'phone' => 'required|max:25|unique:customers,phone,' . $id,
+            'name' => 'required|max:255|unique:customers,name,'.$id,
+            'email' => 'required|max:50|unique:customers,email,'.$id,
+            'phone' => 'required|max:25|unique:customers,phone,'.$id,
         ]);
         customer::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
         ]);
-        return redirect()->route("customer.index")->with("success", "Customer updated successfully.");
+
+        return redirect()->route('customer.index')->with('success', 'Customer updated successfully.');
     }
 
     /**
@@ -94,18 +101,23 @@ class CustomerController extends Controller
     {
         $customer = customer::findOrFail($id);
         $customer->delete();
-        return redirect()->route("customer.index")->with("success", "Customer deleted successfully.");
+
+        return redirect()->route('customer.index')->with('success', 'Customer deleted successfully.');
     }
+
     public function delete(string $id)
     {
         $customer = customer::withTrashed()->findOrFail($id);
         $customer->forceDelete();
-        return redirect()->route("customer.index")->with("success", "Customer deleted successfully.");
+
+        return redirect()->route('customer.index')->with('success', 'Customer deleted successfully.');
     }
+
     public function restore(string $id)
     {
         $customer = customer::withTrashed()->findOrFail($id);
         $customer->restore();
-        return redirect()->route("customer.index")->with("success", "Customer restored successfully.");
+
+        return redirect()->route('customer.index')->with('success', 'Customer restored successfully.');
     }
 }

@@ -15,10 +15,11 @@
         Phone: {{ data_get(session('last_user'), 'phone') }}
     @else
         No last user found.
+        
     @endif
 
     <br>
-    <br>
+            <br>
 
     <a href="{{ url('/') }}">Back to Home</a>
 </body>

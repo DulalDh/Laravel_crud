@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
 
 Route::view('/', 'index')->name('home');
 Route::get('/about-us', [IndexController::class, 'about'])->name('about')->middleware('auth');
@@ -29,5 +30,6 @@ Route::prefix('shop')->name('shop.')->group(function () {
 Route::patch('customer/{customer}/restore', [CustomerController::class, 'restore'])->name('customer.restore');
 Route::delete('customer/{customer}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 Route::resource('customer', CustomerController::class);
+Route::get('customer/{id}/posts', [PostController::class, 'index'])->name('post.index');
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
