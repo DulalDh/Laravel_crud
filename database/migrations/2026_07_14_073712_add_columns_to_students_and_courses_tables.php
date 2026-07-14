@@ -20,10 +20,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
         });
-        Schema::table('course_student', function (Blueprint $table) {
-            $table->string('student_id');
-            $table->string('course_id');
-        });
     }
 
     /**
@@ -37,10 +33,6 @@ return new class extends Migration
 
         Schema::table('courses', function (Blueprint $table) {
             $table->dropColumn(['title', 'description']);
-        });
-
-        Schema::table('course_student', function (Blueprint $table) {
-            $table->dropColumn(['student_id', 'course_id']);
         });
     }
 };
