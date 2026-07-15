@@ -100,7 +100,7 @@ class ShopController extends Controller
 
     public function show($id)
     {
-        $owner = Mechanic::with('owner')->find($id);
+        $owner = Mechanic::with('owner')->with('car')->find($id);
 
         return $owner;
     }
