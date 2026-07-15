@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\JoinController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StudentController;
@@ -42,4 +43,5 @@ Route::post('student/{student}/courses', [StudentController::class, 'attachCours
 Route::resource('course', CourseController::class);
 Route::post('course/{course}/students', [CourseController::class, 'attachStudent'])->name('course.students.store');
 
+Route::resource('join', JoinController::class);
 require __DIR__.'/settings.php';

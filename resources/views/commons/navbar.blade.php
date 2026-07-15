@@ -73,7 +73,7 @@
             <a
               class="nav-link {{ request()->routeIs('student.*') ? 'active fw-semibold' : '' }}"
               @if (request()->routeIs('student.*')) aria-current="page" @endif
-              href="{{ route('student.index') }}"
+              href="{{ route('student.store') }}"
             >
               Students
             </a>
@@ -85,6 +85,13 @@
               href="{{ route('course.index') }}"
             >
               Courses
+            </a>
+                        <a
+              class="nav-link {{ request()->routeIs('join.*') ? 'active fw-semibold' : '' }}"
+              @if (request()->routeIs('join.*')) aria-current="page" @endif
+              href="{{ route('join.index') }}"
+            >
+              Check Join
             </a>
           </li>
         </ul>
