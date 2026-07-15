@@ -73,6 +73,9 @@
                                                     Delete
                                                 </button>
                                             </form>
+                                            <a href="{{ route('shop.show', 1) }}" class="btn btn-outline-secondary btn-sm">
+                                                Show Owner
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

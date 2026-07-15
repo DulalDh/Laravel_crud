@@ -18,6 +18,7 @@ Route::prefix('shop')->name('shop.')->group(function () {
     Route::get('/edit/{id}', [ShopController::class, 'edit'])->name('edit');
     Route::put('/update/{id}', [ShopController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [ShopController::class, 'destroy'])->name('destroy');
+    Route::get('/show/{id}', [ShopController::class, 'show'])->name('show');
 });
 
 // Ro(ute::prefix('customer')->name('customer.')->group(function () {
