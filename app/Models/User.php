@@ -6,6 +6,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,5 +52,49 @@ class User extends Authenticatable implements PasskeyUser
     public function image()
     {
         return $this->morphOne(Image::class, 'mediable');
+    }
+
+    // // Mutators
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
+
+    // public function setNameAttribute($value)
+    // {
+    //     $this->attributes['name'] = strtolower($value);
+    // }
+
+    // public function setEmailAttribute($value)
+    // {
+    //     $this->attributes['email'] = strtolower($value);
+    // }
+
+    // // Accessors
+    // public function getEmailAttribute($value)
+    // {
+    //     return strtolower($value);
+    // }
+
+    // public function getNameAttribute($value)
+    // {
+    //     return strtoupper($value);
+    // }
+
+    // New Accessors and Mutators using Attribute class
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => strtoupper($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => strtolower($value),
+            set: fn ($value) => strtolower($value),
+        );
     }
 }

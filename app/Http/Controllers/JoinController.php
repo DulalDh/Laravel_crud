@@ -63,9 +63,13 @@ class JoinController extends Controller
 
         // return response()->json($blogData);
 
-        $blogData = Post::with('comments')->findOrFail(1);
+        // $blogData = Post::with('comments')->findOrFail(1);
 
-        return response()->json($blogData);
+        // return response()->json($blogData);
+
+        $users = User::all();
+
+        return response()->json($users);
     }
 
     /**
